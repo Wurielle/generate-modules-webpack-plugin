@@ -1,0 +1,43 @@
+{
+  "name": "@wurielle/generate-modules-webpack-plugin",
+  "repository": "https://github.com/wurielle/generate-modules-webpack-plugin",
+  "version": "0.1.0",
+  "description": "",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "watch": "parcel watch",
+    "build": "parcel build",
+    "publish": "npm run build && npm publish"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/packager-ts": "^2.4.0",
+    "@parcel/transformer-typescript-types": "^2.4.0",
+    "@types/node": "^17.0.31",
+    "parcel": "^2.0.1",
+    "typescript": "^4.6.4"
+  },
+  "engines": {
+    "node": ">= 12"
+  },
+  "dependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/plugin-transform-modules-amd": "^7.16.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.17.9",
+    "@babel/plugin-transform-modules-systemjs": "^7.17.8",
+    "@babel/plugin-transform-modules-umd": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "globby": "^11.0.4",
+    "minimatch": "^5.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "files": [
+    "/dist"
+  ]
+}
