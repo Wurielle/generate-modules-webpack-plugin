@@ -1,12 +1,12 @@
 # Generate Modules Webpack Plugin
-Generate new CommonJS, AMD, UMD or SystemJS modules live using Babel.
+Generate CommonJS, AMD, UMD or SystemJS modules live using Webpack.
 
 ## What it do and why???
-In my case I needed to share tokens between my project (TypeScript + ES modules import/export) with a configuration file (`tailwind.config.js` which is a CommonJS modules).
+In my case I needed to share tokens between my project (TypeScript + ES modules import/export) with a configuration file (`tailwind.config.js` which is a CommonJS module).
 
-Mixing imports and exports between ES modules and CommonJS modules or enabling `{ "type": "module" }` in your `package.json` can throw some errors that can't be resolved entirely by you.
+Mixing imports and exports between ES modules and CommonJS modules or enabling `{ "type": "module" }` in your `package.json` can throw some errors that can't be resolved entirely by you sometimes.
 
-This plugin aims to generate other types of modules for specified files that you can import depending on your needs.
+This plugin aims to generate other types of modules for specified files that you can import differently depending on your needs.
 
 ## Install
 ```shell
@@ -14,7 +14,7 @@ npm config set @wurielle:registry https://npm.pkg.github.com && npm install @wur
 ```
 
 ## Usage
-Let's say we have a "tokens" file we want to share between incompatible processes:
+Let's say we have a `tokens.ts` file we want to share between processes with different module formats:
 
 ```typescript
 // ./config/tailwindcss/tokens.ts
@@ -46,7 +46,7 @@ module.exports = {
 }
 ```
 
-This will generate modules in the same folder of the matched file: 
+This will generate modules for matching files in the same folder: 
 ```
 tokens.amd.js
 tokens.common.js
@@ -54,6 +54,7 @@ tokens.systemjs.js
 tokens.ts
 tokens.umd.js
 ```
+
 So that you can import them like:
 ```javascript
 // CommonJS module - tailwind.config.js for instance
@@ -82,4 +83,22 @@ export const Button = styled.button`
   border: 2px solid ${tokens.colors.primary.DEFAULT};
   border-radius: 3px;
 `
+```
+
+## Options
+
+### `pattern`
+Path or glob.
+```javascript
+{
+    pattern: './src/**/*.shared.ts' // defaults to ''
+}
+```
+
+### `into`
+Array of module types.
+```javascript
+{
+    pattern: ['commonjs', 'amd', 'umd', 'systemjs'] // defaults to []
+}
 ```
